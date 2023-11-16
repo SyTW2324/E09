@@ -3,9 +3,11 @@ import validator from 'validator';
 
 export interface UserDocumentInterface extends Document {
   name: string;
+  surname: string;
   username: string;
   email: string;
-  age?: number;
+  dni: string;   
+  image?: string;
 }
 
 const UserSchema = new Schema<UserDocumentInterface>({
@@ -20,6 +22,11 @@ const UserSchema = new Schema<UserDocumentInterface>({
     required: true,
     trim: true
   },
+  surname: {
+    type: String,
+    required: true,
+    trim: true
+  },
   email: {
     type: String,
     required: true,
@@ -31,15 +38,27 @@ const UserSchema = new Schema<UserDocumentInterface>({
       }
     }
   },
-  age: {
-    type: Number,
-    default: 0,
-    validate(value: number) {
-      if (value < 0) {
-        throw new Error('Age must be greater than 0');
+  dni: {
+    type: String,
+    required: true,
+    trim: true,
+    validate(value: string) {
+      // We check with a regular expression if the dni is valid [0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][A-Z]
+      const dniRegex = /^[0-9]{8}[A-Z]$/;
+      if (!dniRegex.test(value)) {
+        throw new Error('DNI is invalid');
       }
     }
   },
+  image: {
+    type: String,
+    default : '/images/default.png',
+    validate(value: string) {
+      if (!validator.default.isURL(value)) {
+        throw new Error('Image URL is invalid');
+      }
+    }
+  }
 });
 
 export const User = model<UserDocumentInterface>('User', UserSchema);
