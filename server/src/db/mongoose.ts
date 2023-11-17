@@ -1,4 +1,6 @@
 import { connect } from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
 try {
   await connect(process.env.ATLAS_URI!);
