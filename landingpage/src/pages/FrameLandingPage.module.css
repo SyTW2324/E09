@@ -1,0 +1,78 @@
+.background,
+.backgroundImageIcon,
+.header {
+  position: absolute;
+  left: 0;
+  width: 1920px;
+  height: 1280px;
+}
+.backgroundImageIcon {
+  top: 100px;
+  object-fit: cover;
+}
+.background,
+.header {
+  top: -100px;
+}
+.header {
+  top: 0;
+  background-color: #d9d9d9;
+  height: 133px;
+}
+.registrarse,
+.registrarse1 {
+  position: absolute;
+  width: 319px;
+  height: 51px;
+}
+.registrarse1 {
+  top: 0;
+  left: 0;
+  display: inline-block;
+}
+.registrarse {
+  top: 41px;
+  left: 1511px;
+}
+.fullLogoIcon,
+.iniciarSesinLogo,
+.login {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+.iniciarSesinLogo {
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+.fullLogoIcon,
+.login {
+  top: 16px;
+  left: 1780px;
+}
+.fullLogoIcon {
+  top: 14px;
+  left: 18px;
+  width: 500px;
+  height: 103.3px;
+  object-fit: cover;
+}
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 133px;
+}
+.frameLandingPage {
+  position: relative;
+  background-color: #fff;
+  width: 100%;
+  height: 1080px;
+  overflow: hidden;
+  text-align: center;
+  font-size: 35px;
+  color: #ea8b04;
+  font-family: var(--font-inter);
+}

@@ -3,6 +3,7 @@ import validator from 'validator';
 
 export interface UserDocumentInterface extends Document {
   name: string;
+  password: string;
   surname: string;
   username: string;
   email: string;
@@ -15,6 +16,31 @@ const UserSchema = new Schema<UserDocumentInterface>({
     type: String,
     required: true,
     trim: true
+  },
+  password: {
+    type: String,
+    required: true,
+    trim: true,
+    validate(password: string) {
+      if (password.length < 4) {
+        throw new Error('Password is too short (min 4 characters)');
+      }
+      if (password.length > 30) {
+        throw new Error('Password is too long (max 30 characters)');
+      }
+      const hasUppercase = /[A-Z]/.test(password);
+      if (!hasUppercase) {
+        throw new Error('Password needs an uppercase letter)');
+      }
+      const hasLowercase = /[a-z]/.test(password);
+      if (!hasLowercase) {
+        throw new Error('Password needs an lowercase letter)');
+      }
+      const hasNumber = /[0-9]/.test(password);
+      if (!hasNumber) {
+        throw new Error('Password needs a number)');
+      }
+    }
   },
   username: {
     type: String,
@@ -55,7 +81,7 @@ const UserSchema = new Schema<UserDocumentInterface>({
   image: {
     type: String,
     required: false,
-    default : '/images/default.png',
+    default : 'https://cdn.vectorstock.com/i/preview-1x/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg',
     validate(value: string) {
       if (!validator.default.isURL(value)) {
         throw new Error('Image URL is invalid');

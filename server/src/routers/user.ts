@@ -48,6 +48,54 @@ userRouter.get("/users", async (req, res) => {
   }
 });
 
+/**
+ * Post para validar un usuario 
+ */
+userRouter.post("/users/login", async (req, res) => {
+  const username = req.body.username;
+  const email = req.body.email;
+  const password = req.body.passowrd;
+  try {
+    let user;
+    if (!username && !email) {
+      return res.status(404).send("No hay usuario o email");
+    }
+    else if (username) {
+      user = await User.find({ username });
+      if (user == ) {
+        return res.status(404).send("No hay usuario o email");
+      } else {
+        
+      }
+    }
+    else if (email) {
+      user = await User.find({ email });
+    }
+    return res.send(user);
+  } catch (err) {
+    return res.status(500).send();
+  }
+});
+
+/**
+ * Delete para eliminar un usuario en específico mediante query
+ */
+userRouter.delete("/users", async (req, res) => {
+  const name = req.query.name;
+  try {
+    const user = await User.findOne({ name });
+    //const user = await User.findOneAndDelete({ name });
+    if (!user) {
+      return res.status(404).send();
+    }
+    await User.findOneAndDelete({ name });
+    return res.status(200).send(user);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+});
+
+
 // /**
 //  * Get para un usuario en específico mediante ID
 //  */
