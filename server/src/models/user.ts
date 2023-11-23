@@ -30,6 +30,7 @@ const UserSchema = new Schema<UserDocumentInterface>({
   email: {
     type: String,
     required: true,
+    unique: true,
     trim: true,
     lowercase: true,
     validate(value: string) {
@@ -41,6 +42,7 @@ const UserSchema = new Schema<UserDocumentInterface>({
   dni: {
     type: String,
     required: true,
+    unique: true,
     trim: true,
     validate(value: string) {
       // We check with a regular expression if the dni is valid [0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][A-Z]
@@ -52,6 +54,7 @@ const UserSchema = new Schema<UserDocumentInterface>({
   },
   image: {
     type: String,
+    required: false,
     default : '/images/default.png',
     validate(value: string) {
       if (!validator.default.isURL(value)) {
