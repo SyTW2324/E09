@@ -1,21 +1,12 @@
 import React from 'react';
-import './App.css';
+import Login from './components/LoginSingUp/Login';
+import SignUp from './components/LoginSingUp/SignUp';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload xd.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <SignUp/>
       </header>
     </div>
   );

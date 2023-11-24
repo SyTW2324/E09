@@ -54,24 +54,25 @@ userRouter.get("/users", async (req, res) => {
 userRouter.post("/users/login", async (req, res) => {
   const username = req.body.username;
   const email = req.body.email;
-  const password = req.body.passowrd;
+  const password = req.body.password;
   try {
     let user;
     if (!username && !email) {
       return res.status(404).send("No hay usuario o email");
     }
     else if (username) {
-      user = await User.find({ username });
-      if (user == ) {
-        return res.status(404).send("No hay usuario o email");
-      } else {
-        
+      user = await User.find({ username: username, password: password });
+      if(user.length === 0) {
+        return res.status(404).send("El usuario o la contraseña son incorrectos");
       }
     }
     else if (email) {
-      user = await User.find({ email });
+      user = await User.find({ email: email, password: password });
+      if(user.length === 0) {
+        return res.status(404).send("El email o la contraseña son incorrectos");
+      }
     }
-    return res.send(user);
+    return res.status(200).send(user);
   } catch (err) {
     return res.status(500).send();
   }
