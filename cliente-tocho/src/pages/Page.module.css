@@ -1,0 +1,202 @@
+.yourJourneyYour {
+  position: absolute;
+  top: 54px;
+  left: 90px;
+  display: inline-block;
+  width: 165px;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+.odyssey1 {
+  margin: 0;
+}
+.odyssey {
+  position: absolute;
+  top: 0;
+  left: 90px;
+  font-size: var(--font-size-31xl);
+  font-family: var(--font-post-no-bills-jaffna-semibold);
+  display: inline-block;
+  width: 165px;
+  height: 51px;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+.outputOnlinepngtools1Icon {
+  position: absolute;
+  top: 10px;
+  left: -4px;
+  width: 83px;
+  height: 73px;
+  object-fit: cover;
+}
+.logo,
+.logo1 {
+  width: 255px;
+  height: 75px;
+}
+.logo1 {
+  position: relative;
+}
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+.login {
+  position: relative;
+  text-transform: uppercase;
+  display: inline-block;
+  width: 75px;
+}
+.loginWrapper {
+  border-radius: var(--br-base);
+  background-color: var(--color-darkorange-100);
+  width: 75px;
+  height: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.loginsignup,
+.negativeNavbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.loginsignup {
+  width: 165px;
+  height: 62px;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+  font-size: var(--font-size-5xl);
+  color: var(--color-white);
+  font-family: var(--font-abel);
+}
+.negativeNavbar {
+  background-color: var(--color-lavenderblush);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  width: 1920px;
+  height: 170px;
+  align-items: flex-start;
+  padding: var(--padding-24xl) var(--padding-227xl) var(--padding-33xl);
+  box-sizing: border-box;
+  gap: var(--gap-986xl);
+}
+.cheapHousing {
+  align-self: stretch;
+  position: relative;
+  text-transform: uppercase;
+}
+.frame1,
+.frame2 {
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+}
+.frame2 {
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+}
+.frame1 {
+  width: 525px;
+  flex-shrink: 0;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.thisInnovativeCompany {
+  position: undefined;
+  text-transform: uppercase;
+  display: inline-block;
+  width: 254px;
+  margin-top: 104px;
+}
+.casasIcon {
+  position: relative;
+  width: 792px;
+  height: 408px;
+  object-fit: cover;
+  margin-left: -23px;
+}
+.description,
+.frame3 {
+  height: 408px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frame3 {
+  width: 1204px;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-left: -487px;
+  text-align: left;
+  font-size: var(--font-size-6xl);
+  font-family: var(--font-abeezee);
+}
+.description {
+  width: 1242px;
+  position: undefined;
+  margin-left: 178px;
+  text-align: center;
+  font-size: 60px;
+  color: var(--color-white);
+  font-family: var(--font-abyssinica-sil);
+}
+.frame {
+  width: 1920px;
+  height: 744px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 166px;
+}
+.background1,
+.backgroundModified11 {
+  position: relative;
+  width: 1920px;
+  height: 1280px;
+}
+.backgroundModified11 {
+  object-fit: cover;
+  margin-top: -1207px;
+}
+.frame4 {
+  width: 1920px;
+  height: 1353px;
+  overflow: hidden;
+  flex-shrink: 0;
+  justify-content: flex-start;
+}
+.frame4,
+.landingPage,
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.landingPage {
+  background-color: var(--color-darkorange-100);
+  width: 1920px;
+  height: 2160px;
+  overflow: hidden;
+  flex-shrink: 0;
+  justify-content: flex-start;
+  gap: 263px;
+}
+.page {
+  position: relative;
+  width: 100%;
+  justify-content: center;
+  text-align: left;
+  font-size: var(--font-size-2xl);
+  color: var(--color-darkorange-100);
+  font-family: var(--font-reenie-beanie);
+}
