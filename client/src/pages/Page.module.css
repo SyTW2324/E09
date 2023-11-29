@@ -28,19 +28,16 @@
   height: 73px;
   object-fit: cover;
 }
-.logo,
-.logo1 {
+.logo {
   width: 255px;
   height: 75px;
-}
-.logo1 {
-  position: relative;
 }
 .logo {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-start;
+  position: relative;
 }
 .login {
   position: relative;

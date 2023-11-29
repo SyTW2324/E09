@@ -19,31 +19,20 @@ const Page: FunctionComponent = () => {
         <div className={styles.frame}>
           <div className={styles.negativeNavbar}>
             <div className={styles.logo}>
-              <div className={styles.logo1}>
+                <img className={styles.outputOnlinepngtools1Icon} alt="" src="/outputonlinepngtools-1@2x.png"/>
                 <div className={styles.yourJourneyYour}>
                   Your Journey. Your Way
                 </div>
                 <div className={styles.odyssey}>
                   <p className={styles.odyssey1}>ODYSSEY</p>
                 </div>
-                <img
-                  className={styles.outputOnlinepngtools1Icon}
-                  alt=""
-                  src="/outputonlinepngtools-1@2x.png"
-                />
-              </div>
+             
             </div>
             <div className={styles.loginsignup}>
-              <div
-                className={styles.loginWrapper}
-                onClick={onFrameContainerClick}
-              >
+              <div className={styles.loginWrapper} onClick={onFrameContainerClick}>
                 <div className={styles.login}>Login</div>
               </div>
-              <div
-                className={styles.loginWrapper}
-                onClick={onFrameContainer1Click}
-              >
+              <div className={styles.loginWrapper} onClick={onFrameContainer1Click} >
                 <div className={styles.login}>SignUp</div>
               </div>
             </div>
@@ -66,11 +55,7 @@ const Page: FunctionComponent = () => {
         </div>
         <div className={styles.frame4}>
           <div className={styles.background1} />
-          <img
-            className={styles.backgroundModified11}
-            alt=""
-            src="/backgroundmodified-1-1@2x.png"
-          />
+          <img className={styles.backgroundModified11} alt="" src="/backgroundmodified-1-1@2x.png" />
         </div>
       </div>
     </div>
