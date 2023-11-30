@@ -20,7 +20,7 @@ function Login() {
 
   useEffect(() => {
     if (auth._id) {
-      navigate("/home");
+      navigate("/");
     }
   }, [auth._id, navigate]);
 
@@ -45,7 +45,7 @@ function Login() {
       </header>
       <main>
         <div>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control name="email" type="email" placeholder="Enter email" />

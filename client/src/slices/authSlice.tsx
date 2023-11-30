@@ -67,14 +67,19 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (user: any, { rejectWithValue }) => {
     try {
-      const token = await axios.post(`http://localhost:64333/login`, {
+      const response = await axios.post(`http://localhost:64333/users/login`, {
         email: user.email,
         password: user.password,
       });
+      
+      const token: string = response.data.authToken;
 
-      localStorage.setItem("token", token.data);
-
-      return token.data;
+      if (typeof token === 'string') {
+        localStorage.setItem("token", token);
+        return token;
+      } else {
+        throw new Error('Token is not a string');
+      }
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
