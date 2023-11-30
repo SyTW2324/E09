@@ -1,25 +1,3 @@
-// import {createSlice} from "@reduxjs/toolkit"
-
-// const initialState = {
-//   token: localStorage.getItem("token"),
-//   name: "",
-//   email: "",
-//   _id: "",
-//   registerStatus: "",
-//   registerError: "",
-//   loginStatus: "",
-//   loginError: "",
-//   userLoaded: false,
-// };
-
-// const authSlice = createSlice({
-//   name: "auth",
-//   initialState,
-//   reducers:{},
-//   extraReducers:{},
-// });
-
-// export default authSlice.reducer;
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -72,7 +50,6 @@ export const registerUser = createAsyncThunk(
       });
 
       // localStorage.setItem("token", token.data);
-
       // return token.data;
     } catch (error) {
       if (error instanceof Error) {
@@ -90,7 +67,7 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (user: any, { rejectWithValue }) => {
     try {
-      const token = await axios.post(`http://localhost:5000/login`, {
+      const token = await axios.post(`http://localhost:64333/login`, {
         email: user.email,
         password: user.password,
       });
