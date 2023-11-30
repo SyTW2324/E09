@@ -1,7 +1,7 @@
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { setHeaders } from "./api";
+import { setHeaders, url } from "./api";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 
 interface MyToken extends JwtPayload {
@@ -40,7 +40,7 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (user: any, { rejectWithValue }) => {
     try {
-      const token = await axios.post(`http://localhost:64333/users`, {
+      const token = await axios.post(`${url}/users`, {
         name: user.name,
         surname: user.surname,
         username: user.username,
@@ -49,8 +49,6 @@ export const registerUser = createAsyncThunk(
         password: user.password,
       });
 
-      // localStorage.setItem("token", token.data);
-      // return token.data;
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
@@ -67,7 +65,7 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (user: any, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`http://localhost:64333/users/login`, {
+      const response = await axios.post(`${url}/users/login`, {
         email: user.email,
         password: user.password,
       });
@@ -97,7 +95,7 @@ export const getUser = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const token = await axios.get(
-        `http://localhost:5000/user/${id}`,
+        `${url}/user/${id}`,
         setHeaders()
       );
 
