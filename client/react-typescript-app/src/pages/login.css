@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: url('../imgs/background.jpg'); /* Reemplaza 'ruta_de_la_imagen.jpg' con la ruta de tu imagen */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%; /* Ajusta la altura según tus necesidades */
+} 
+
+.Login {
+  text-align: center;
+  background-color: #ED8B01;
+  flex: 1; /* El elemento Login se expandirá para ocupar todo el espacio restante vertical */
+  display: flex;
+  flex-direction: column;
+}
+
+.tree-background {
+  background-image: url('../imgs/background.jpg'); /* Reemplaza 'ruta_de_la_imagen.jpg' con la ruta de tu imagen */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%; /* Ajusta la altura según tus necesidades */
+}
+
+.custom-form {
+  background-color: #000000;
+  padding: 20px; /* Ajusta el espaciado según sea necesario */
+  border-radius: 10px; /* Agrega esquinas redondeadas */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Agrega sombra para resaltar el formulario */
+}
