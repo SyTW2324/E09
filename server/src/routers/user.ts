@@ -2,8 +2,10 @@ import express from "express";
 import { User } from "../models/user.js";
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { verifyToken } from "../functions/verifytoken.js";
+import dotenv from 'dotenv';
 
-const AUTH_TOKEN_KEY = '398GGD54DFDG6235EA0RFFGSGG732';
+dotenv.config();
+
 
 
 /**
@@ -20,7 +22,6 @@ userRouter.use(express.json());
  * Post para crear un usuario
  */
 userRouter.post("/users", async (req, res) => {
-  console.log(req.body)
   const user = new User(req.body);
   try {
     await user.save();
@@ -34,7 +35,7 @@ userRouter.post("/users", async (req, res) => {
 /**
  * Get para todos los usuarios o para un usuario en específico mediante nombre usando query
  */
-userRouter.get("/users", verifyToken, async (req, res) => {
+userRouter.get("/users", async (req, res) => {
   const name = req.query.name;
   try {
     let users;
@@ -70,9 +71,16 @@ userRouter.post("/users/login", async (req, res) => {
       return res.status(404).send("El email o la contraseña son incorrectos");
     }
     const jwtOptions = { expiresIn: '2h'};
-    const authToken = jwt.sign(user[0].toJSON() , AUTH_TOKEN_KEY, jwtOptions);
+    const authToken = jwt.sign(user[0].toJSON() , process.env.AUTH_TOKEN_KEY!, jwtOptions);
     
-    return res.status(200).send({...user, authToken});
+    return res.status(200).send({user: {
+      username: user[0].username,
+      name:user[0].name,
+      surname:user[0].surname,
+      email:user[0].email,
+      dni:user[0].dni,
+      image:user[0].image,
+    }, authToken});
   } catch (err) {
     console.log(err)
     return res.status(500).send(err);
@@ -83,14 +91,14 @@ userRouter.post("/users/login", async (req, res) => {
  * Delete para eliminar un usuario en específico mediante query
  */
 userRouter.delete("/users", async (req, res) => {
-  const name = req.query.name;
+  const username = req.body.username;
   try {
-    const user = await User.findOne({ name });
+    const user = await User.findOne({ username: username });
     //const user = await User.findOneAndDelete({ name });
     if (!user) {
-      return res.status(404).send();
+      return res.status(404).send("No se encuentra el usuario");
     }
-    await User.findOneAndDelete({ name });
+    await User.findOneAndDelete({ username: username });
     return res.status(200).send(user);
   } catch (error) {
     return res.status(400).send(error);
