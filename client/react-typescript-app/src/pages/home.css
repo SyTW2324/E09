@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #ED8B01;
+}
+
+.Home {
+  text-align: center;
+  background-color: #ED8B01;
+  flex: 1; /* El elemento Home se expandirá para ocupar todo el espacio restante vertical */
+  display: flex;
+  flex-direction: column;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .Home-logo {
+    animation: Home-logo-spin infinite 20s linear;
+  }
+}
+
+/* .Home-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+} */
+
+.Home-link {
+  color: #61dafb;
+}
+
+@keyframes Home-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cheap-housing {
+  color: white;
+  /* text-align: justify; */
+  
+}
+
+/* Estilos para la tipografía Abyssinica SIL */
+.abyssinica-sil {
+  font-family: 'Abyssinica SIL'; /* Ajusta la fuente según tus necesidades */
+}
+
+/* Estilos para la tipografía ABeeZee */
+.abeezee-font {
+  font-family: 'ABeeZee'; /* Ajusta la fuente según tus necesidades */
+}
+
+.tree-background {
+  background-image: url('../imgs/background.jpg'); /* Reemplaza 'ruta_de_la_imagen.jpg' con la ruta de tu imagen */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%; /* Ajusta la altura según tus necesidades */
+}
