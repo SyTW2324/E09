@@ -39,6 +39,20 @@ function Register() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
+    // Obtener los valores del formulario
+    const formData = new FormData(e.target);
+    const newUser = Object.fromEntries(formData.entries()) as { 
+      name: string; 
+      surname: string; 
+      username: string; 
+      email: string; 
+      dni: string; 
+      password: string; 
+    };
+  
+    // Actualizar el estado user
+    setUser(newUser);
+
     dispatch(registerUser(user) as any);
   };
   // const handleSubmit = async (e: any) => {
