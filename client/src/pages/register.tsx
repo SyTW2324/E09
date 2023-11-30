@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../slices/authSlice";
+import { registerUser } from "../slices/authSlice";
 import { useState } from "react";
 
 const errorMessages = {
@@ -38,24 +38,29 @@ function Register() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-  
-    // Obtener los valores del formulario
-    const formData = new FormData(e.target);
-    const newUser = Object.fromEntries(formData.entries()) as { 
-      name: string; 
-      surname: string; 
-      username: string; 
-      email: string; 
-      dni: string; 
-      password: string; 
-    };
-  
-    // Actualizar el estado user
-    setUser(newUser);
-  
-    // Despachar la acción loginUser
-    dispatch(loginUser(newUser) as any);
+
+    dispatch(registerUser(user) as any);
   };
+  // const handleSubmit = async (e: any) => {
+  //   e.preventDefault();
+  
+  //   // Obtener los valores del formulario
+  //   const formData = new FormData(e.target);
+  //   const newUser = Object.fromEntries(formData.entries()) as { 
+  //     name: string; 
+  //     surname: string; 
+  //     username: string; 
+  //     email: string; 
+  //     dni: string; 
+  //     password: string; 
+  //   };
+  
+  //   // Actualizar el estado user
+  //   setUser(newUser);
+  
+  //   // Despachar la acción loginUser
+  //   dispatch(loginUser(newUser) as any);
+  // };
 
   return (
     <div className="Login">
