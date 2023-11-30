@@ -9,13 +9,6 @@ import { useDispatch } from "react-redux";
 import { registerUser } from "../slices/authSlice";
 import { useState } from "react";
 
-const errorMessages = {
-  'Request failed with status code 404': 'User not found',
-  'Request failed with status code 422': 'Invalid email',
-  'Request failed with status code 401': 'Invalid password',
-  'Request failed with status code 500': 'Server error',
-}
-
 function Register() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,32 +43,11 @@ function Register() {
       password: string; 
     };
   
-    // Actualizar el estado user
     setUser(newUser);
 
     dispatch(registerUser(user) as any);
   };
-  // const handleSubmit = async (e: any) => {
-  //   e.preventDefault();
-  
-  //   // Obtener los valores del formulario
-  //   const formData = new FormData(e.target);
-  //   const newUser = Object.fromEntries(formData.entries()) as { 
-  //     name: string; 
-  //     surname: string; 
-  //     username: string; 
-  //     email: string; 
-  //     dni: string; 
-  //     password: string; 
-  //   };
-  
-  //   // Actualizar el estado user
-  //   setUser(newUser);
-  
-  //   // Despachar la acción loginUser
-  //   dispatch(loginUser(newUser) as any);
-  // };
-
+ 
   return (
     <div className="Login">
       <header>
