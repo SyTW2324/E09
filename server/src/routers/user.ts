@@ -20,6 +20,7 @@ userRouter.use(express.json());
  * Post para crear un usuario
  */
 userRouter.post("/users", async (req, res) => {
+  console.log(req.body)
   const user = new User(req.body);
   try {
     await user.save();

@@ -63,8 +63,11 @@ export const registerUser = createAsyncThunk(
   async (user: any, { rejectWithValue }) => {
     try {
       const token = await axios.post(`http://localhost:64333/users`, {
+        name: user.name,
+        surname: user.surname,
         username: user.username,
         email: user.email,
+        dni: user.dni,
         password: user.password,
       });
 

@@ -9,14 +9,14 @@ import cors from 'cors';
 export const app = express();
 app.use(express.json());
 
-app.use(userRouter);
-app.use(defaultRouter);
-
 // cors
-app.use('/', cors({
-    origin: true, // NOTE: Allowing all origins for now
+app.use(cors({
+    origin: 'http://localhost:3000', // NOTE: Specify the origin
     optionsSuccessStatus: 200,
     preflightContinue: false,
     methods: "GET,POST,OPTIONS",
     credentials: true
-  }));
+}));
+
+app.use(userRouter);
+app.use(defaultRouter);
