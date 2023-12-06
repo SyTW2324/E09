@@ -15,7 +15,7 @@
     "fullstart": "npm run prepare && npm run build:server &&concurrently \"npm run start:server\" \"npm run start:client\"",
     "start:server": "cd server && npm start",
     "start:client": "cd client && npm start",
-    "test": "npm run build:server && concurrently -s first \"npm run test:client\" \"npm run start:server\"",
+    "test": "npm run build:server && concurrently \"npm run test:client\" \"npm run start:server\" -k -s first",
     "test:client": "cd client && npm run cy:run"
   },
   "keywords": [],
