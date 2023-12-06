@@ -28,9 +28,6 @@ jobs:
 
     - name: Install global dependencies 
       run: npm i
-
-    - name: Install client/server dependencies 
-      run: npm run prepare
     
     - name: Running tests
       run: npm run test
