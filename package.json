@@ -1,0 +1,26 @@
+{
+  "name": "oddysey-app",
+  "version": "1.0.0",
+  "description": "Travelling without cost",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "npm run prepare && concurrently \"npm run build:server\" \"npm run build:client\"",
+    "build:server": "cd server && npm run build",
+    "build:client": "cd client && npm run build",
+    "prepare": "concurrently \"npm run prepare:server\" \"npm run prepare:client\"",
+    "prepare:server": "cd server && npm install",
+    "prepare:client": "cd client && npm install",
+    "start": "npm run prepare && concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:server": "cd server && npm start",
+    "start:client": "cd client && npm start",
+    "test": "npm run prepare && concurrently \"npm run test:client\" \"npm run start:server\"",
+    "test:client": "cd client && npm run cy:run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.1.0"
+  }
+}

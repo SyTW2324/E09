@@ -32,7 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run --component"
   },
   "eslintConfig": {
     "extends": [
