@@ -8,7 +8,7 @@ export interface UserDocumentInterface extends Document {
   username: string;
   email: string;
   dni: string;   
-  image?: string;
+  image?: Buffer;
 }
 
 const UserSchema = new Schema<UserDocumentInterface>({
@@ -79,14 +79,11 @@ const UserSchema = new Schema<UserDocumentInterface>({
     }
   },
   image: {
-    type: String,
-    required: false,
-    default : 'https://cdn.vectorstock.com/i/preview-1x/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg',
-    validate(value: string) {
-      if (!validator.default.isURL(value)) {
-        throw new Error('Image URL is invalid');
-      }
-    }
+    type: {
+      data: Buffer,
+      contentType: String
+    },
+    required: false
   }
 });
 
