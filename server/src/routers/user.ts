@@ -56,6 +56,22 @@ userRouter.get("/users", async (req, res) => {
 });
 
 /**
+ * Get para un usuario en específico mediante ID
+ */
+userRouter.get("/users/:dni", async (req, res) => {
+  const dni = req.params.dni;
+  try {
+    const user = await User.findOne({ dni: dni });
+    if (!user) {
+      return res.status(404).send();
+    }
+    return res.send(user);
+  } catch (err) {
+    return res.status(500).send();
+  }
+});
+
+/**
  * Post para validar un usuario 
  */
 userRouter.post("/users/login", async (req, res) => {
@@ -90,131 +106,52 @@ userRouter.post("/users/login", async (req, res) => {
 /**
  * Delete para eliminar un usuario en específico mediante query
  */
-userRouter.delete("/users", async (req, res) => {
-  const username = req.body.username;
+userRouter.delete("/users/:dni", async (req, res) => {
+  const dni = req.params.dni;
   try {
-    const user = await User.findOne({ username: username });
+    const user = await User.findOne({ dni: dni });
     //const user = await User.findOneAndDelete({ name });
     if (!user) {
       return res.status(404).send("No se encuentra el usuario");
     }
-    await User.findOneAndDelete({ username: username });
+    await User.findOneAndDelete({ dni: dni });
     return res.status(200).send(user);
   } catch (error) {
     return res.status(400).send(error);
   }
 });
 
-
-// /**
-//  * Get para un usuario en específico mediante ID
-//  */
-// userRouter.get("/users/:id", async (req, res) => {
-//   const userID = req.params.id;
-//   try {
-//     const user = await User.findById(userID)
-//       .populate({ path: "friends", select: "name" })
-//       .populate({ path: "groups", select: "name" })
-//       .populate({ path: "activeChallenges", select: "name" })
-//       .populate({ path: "favouriteTracks", select: "name" })
-//       .populate({ path: "tracksHistory.track", select: "name" });
-//     if (!user) {
-//       return res.status(404).send();
-//     }
-//     return res.send(user);
-//   } catch (err) {
-//     return res.status(500).send();
-//   }
-// });
-
-
-
-// /**
-//  * Patch para actualizar un usuario en específico mediante ID y los datos en el body
-//  */
-// userRouter.patch("/users/:id", async (req, res) => {
-//   //actualizar un usaurio por su id
-//   const userID = req.params.id;
-//   const updates = Object.keys(req.body);
-//   const allowedUpdates = [
-//     "name",
-//     "activity",
-//     "friends",
-//     "groups",
-//     "favouriteTracks",
-//     "activeChallenges",
-//     "tracksHistory",
-//     "trainingStatistics",
-//   ];
-//   const isValidOperation = updates.every((update) =>
-//     allowedUpdates.includes(update)
-//   );
-//   if (!isValidOperation) {
-//     return res.status(400).send({ error: "Invalid updates!" });
-//   }
-//   try {
-//     const user = await User.findByIdAndUpdate(userID, req.body, {
-//       new: true,
-//       runValidators: true,
-//     });
-//     if (!user) {
-//       return res.status(404).send();
-//     }
-//     // recorrer updates y actualizar las demas cosas en cada caso
-//     for (const update of updates) {
-//       switch (update) {
-//         case "groups":
-//           // borrar de los grupos en los que es participante
-//           await Group.updateMany(
-//             { members: user._id },
-//             { $pull: { members: user._id } }
-//           );
-//           for (const groupID of req.body.groups) {
-//             await Group.findByIdAndUpdate(
-//               groupID,
-//               { $push: { members: user._id } },
-//               { new: true, runValidators: true }
-//             );
-//           }
-//           break;
-//         case "activeChallenges":
-//           // borrar de los challenge en los que es participante
-//           await Challenge.updateMany(
-//             { users: user._id },
-//             { $pull: { users: user._id } }
-//           );
-//           for (const challengeID of req.body.activeChallenges) {
-//             await Challenge.findByIdAndUpdate(
-//               challengeID,
-//               { $push: { users: user._id } },
-//               { new: true, runValidators: true }
-//             );
-//           }
-//           break;
-//         case "tracksHistory":
-//           // borrar de los tracks en los que es participante
-//           await Track.updateMany(
-//             { users: user._id },
-//             { $pull: { users: user._id } }
-//           );
-//           for (const track of req.body.tracksHistory) {
-//             const trackID = track.track;
-//             await Track.findByIdAndUpdate(
-//               trackID,
-//               { $push: { users: user._id } },
-//               { new: true, runValidators: true }
-//             );
-//           }
-//           break;
-//         default:
-//           break;
-//       }
-//     }
-//     return res.status(200).send(user);
-//   } catch (err) {
-//     return res.status(400).send(err);
-//   }
-// });
+/**
+ * Patch para actualizar un usuario en específico mediante ID y los datos en el body
+ */
+userRouter.patch("/users/:dni", async (req, res) => {
+  const dni = req.params.dni;
+  const updates = Object.keys(req.body);
+  const allowedUpdates = [
+    "password",
+    "username",
+    "email", 
+    "image",
+  ];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+  if (!isValidOperation) {
+    return res.status(400).send({ error: "Invalid updates!" });
+  }
+  try {
+    const user = await User.findOneAndUpdate({ dni: dni }, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!user) {
+      return res.status(404).send();
+    }
+    return res.status(200).send(user);
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+});
 
 // /**
 //  * Delete para eliminar un usuario en específico mediante query
