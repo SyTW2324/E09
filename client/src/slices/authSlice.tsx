@@ -8,6 +8,11 @@ interface MyToken extends JwtPayload {
   username: string;
   email: string;
   _id: string;
+
+  name: string;
+  surname: string;
+  dni: string;
+  image: string;
 }
 
 interface AuthState {
@@ -21,6 +26,11 @@ interface AuthState {
   loginStatus: string;
   loginError: string;
   userLoaded: boolean;
+
+  name: string;
+  surname: string;
+  dni: string;
+  // image: string;
 }
 
 const initialState: AuthState = {
@@ -34,6 +44,11 @@ const initialState: AuthState = {
   loginStatus: "",
   loginError: "",
   userLoaded: false,
+  
+  name: "",
+  surname: "",
+  dni: "",
+  // image: "",
 };
 
 export const registerUser = createAsyncThunk(
@@ -188,6 +203,11 @@ const authSlice = createSlice({
           email: user.email,
           _id: user._id,
           loginStatus: "success",
+
+          name: user.name,
+          surname: user.surname,
+          dni: user.dni,
+          image: user.image,
         };
       } else return state;
     });
