@@ -8,7 +8,7 @@ export interface UserDocumentInterface extends Document {
   username: string;
   email: string;
   dni: string;   
-  image?: string;
+  image?: Buffer;
 }
 
 const UserSchema = new Schema<UserDocumentInterface>({
@@ -79,14 +79,11 @@ const UserSchema = new Schema<UserDocumentInterface>({
     }
   },
   image: {
-    type: String,
-    required: false,
-    default : '../images/user.png',
-    // validate(value: string) {
-    //   if (!validator.default.isURL(value)) {
-    //     throw new Error('Image URL is invalid');
-    //   }
-    // }
+    type: {
+      data: Buffer,
+      contentType: String
+    },
+    required: false
   }
 });
 
