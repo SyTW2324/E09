@@ -25,7 +25,7 @@ function Register() {
 
   useEffect(() => {
     if (auth._id) {
-      navigate("/");
+      navigate("/user");
     }
   }, [auth._id, navigate]);
 

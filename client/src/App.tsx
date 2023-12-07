@@ -61,6 +61,7 @@ import {
 import Home from "./pages";
 import Register from "./pages/register";
 import Login from "./pages/login";
+import User from "./pages/user";
 
 function App() {
 	return (
@@ -70,6 +71,7 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/login" element={<Login />} />
+				<Route path="/user" element={<User />} />
 			</Routes>
 		</BrowserRouter>
 	);

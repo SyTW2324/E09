@@ -61,12 +61,12 @@ function NavScroll() {
             {/* Resto del código para la navegación */}
           </Nav>
           <Form className="d-flex">
-            <Link to="login">
+            <Link to="/login">
               <Button variant="outline-success" className="button-margin custom-button">
                 LOGIN
               </Button>
             </Link>
-            <Link to="register">
+            <Link to="/register">
               <Button variant="outline-success" className="button-margin custom-button">
                 SIGNUP
               </Button>
