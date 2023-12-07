@@ -52,11 +52,8 @@
 // export default App;
 
 // Filename - App.js
-
-import React from "react";
-import Navbar from "./components/header";
 import {
-	BrowserRouter as Router,
+	// BrowserRouter as Router,
 	Routes,
 	Route,
 	BrowserRouter,

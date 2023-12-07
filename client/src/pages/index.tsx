@@ -4,7 +4,7 @@ import NavScroll from "../components/header";
 import HousingImage from '../imgs/casas_blancas.png';
 // import Background from './imgs/background.jpg';
 
-import './home.css';
+import './CSS/home.css';
 
 function Home() {
   return (
