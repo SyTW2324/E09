@@ -9,11 +9,12 @@ import { useDispatch } from "react-redux";
 import { registerUser } from "../slices/authSlice";
 import { useState } from "react";
 import "./CSS/user.css";
-import { getUser } from '../slices/authSlice';
+
+import default_user_logo from '../imgs/user.png';
+
 function User() {
   const navigate = useNavigate();
   const auth = useSelector((state: any) => state.auth);
-
   useEffect(() => {
     if (!auth._id) {
       navigate("/");
@@ -30,7 +31,7 @@ function User() {
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
       <div className="container bootdey flex-grow-1 container-p-y">
                   <div className="media align-items-center py-3 mb-3">
-                  <img src={auth.image} alt="fatka" className="d-block ui-w-100 rounded-circle"/>
+                  <img src={auth.image ? default_user_logo : auth.img} alt="foto de perfil" className="d-block ui-w-100 rounded-circle"/>
                     <div className="media-body ml-4">
                       <h4 className="font-weight-bold mb-0">{auth.name} {auth.surname} <span className="text-muted font-weight-normal">{auth.email}</span></h4>
                       <a href="javascript:void(0)" className="btn btn-primary btn-sm">Edit</a>&nbsp;
