@@ -26,8 +26,7 @@ describe('Api Test', () => {
         "username": "johnA",
         "password": "Abcd5",
         "email": "john.doe@example.com",
-        "dni": "12345678F",
-        "image": "https://example.com/johndoe.jpg"
+        "dni": "12345678F"
       }).then((response) => {
         expect(response.status).to.eq(201)
         expect(response.body.name).to.be.eq("John")
