@@ -128,131 +128,132 @@ export const getUser = createAsyncThunk(
     }
   }
 );
-
-const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  reducers: {
-    loadUser(state, action) {
-      const token = state.token;
-
-      if (token) {
-        const user: any = jwtDecode<MyToken>(token);
-        return {
-          ...state,
-          token,
-          username: user.username,
-          email: user.email,
-          _id: user._id,
-          userLoaded: true,
-        };
-      } else return { ...state, userLoaded: true };
-    },
-    logoutUser(state, action) {
-      localStorage.removeItem("token");
-
-      return {
-        ...state,
-        token: "",
-        username: "",
-        email: "",
-        _id: "",
-        registerStatus: "",
-        registerError: "",
-        loginStatus: "",
-        loginError: "",
-      };
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(registerUser.pending, (state, action) => {
-      return { ...state, registerStatus: "pending" };
-    });
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      if (action.payload) {
-        const user = jwtDecode<MyToken>(action.payload);
-        return {
-          ...state,
-          token: action.payload,
-          username: user.username,
-          email: user.email,
-          _id: user._id,
-          registerStatus: "success",
-        };
-      } else return state;
-    });
-    builder.addCase(registerUser.rejected, (state, action) => {
-      if (typeof action.payload === "string") {
-        return {
-          ...state,
-          registerStatus: "rejected",
-          registerError: action.payload,
-        };
-      } else return state;
-    });
-    builder.addCase(loginUser.pending, (state, action) => {
-      return { ...state, loginStatus: "pending" };
-    });
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      if (action.payload) {
-        const user = jwtDecode<MyToken>(action.payload);
-        let img_fixer;
-        if (img_fixer === undefined) {
-          img_fixer = "../imgs/user.png";
-        }
-        return {
-          ...state,
-          token: action.payload,
-          username: user.username,
-          email: user.email,
-          _id: user._id,
-          loginStatus: "success",
-
-          name: user.name,
-          surname: user.surname,
-          dni: user.dni,
-          image: img_fixer,
-        };
-      } else return state;
-    });
-    builder.addCase(loginUser.rejected, (state, action) => {
-      if (typeof action.payload === "string") {
-        return {
-          ...state,
-          loginStatus: "rejected",
-          loginError: action.payload,
-        };
-      } else return state;
-    });
-    builder.addCase(getUser.pending, (state, action) => {
-      return {
-        ...state,
-        getUserStatus: "pending",
-      };
-    });
-    builder.addCase(getUser.fulfilled, (state, action) => {
-      if (action.payload) {
-        const user = jwtDecode<MyToken>(action.payload);
-        return {
-          ...state,
-          token: action.payload,
-          username: user.username,
-          email: user.email,
-          _id: user._id,
-          getUserStatus: "success",
-        };
-      } else return state;
-    });
-    builder.addCase(getUser.rejected, (state, action) => {
-      return {
-        ...state,
-        getUserStatus: "rejected",
-        getUserError: action.payload,
-      };
-    });
-  },
-});
-
-export const { loadUser, logoutUser } = authSlice.actions;
-
-export default authSlice.reducer;
+ 
+ const authSlice = createSlice({
+   name: "auth",
+   initialState,
+   reducers: {
+     loadUser(state, action) {
+       const token = state.token;
+ 
+       if (token) {
+         const user: any = jwtDecode<MyToken>(token);
+         return {
+           ...state,
+           token,
+           username: user.username,
+           email: user.email,
+           _id: user._id,
+           userLoaded: true,
+         };
+       } else return { ...state, userLoaded: true };
+     },
+     logoutUser(state) {
+       localStorage.removeItem("token");
+ 
+       return {
+         ...state,
+         token: "",
+         username: "",
+         email: "",
+         _id: "",
+         registerStatus: "",
+         registerError: "",
+         loginStatus: "",
+         loginError: "",
+       };
+     },
+   },
+   extraReducers: (builder) => {
+     builder.addCase(registerUser.pending, (state, action) => {
+       return { ...state, registerStatus: "pending" };
+     });
+     builder.addCase(registerUser.fulfilled, (state, action) => {
+       if (action.payload) {
+         const user = jwtDecode<MyToken>(action.payload);
+         return {
+           ...state,
+           token: action.payload,
+           username: user.username,
+           email: user.email,
+           _id: user._id,
+           registerStatus: "success",
+         };
+       } else return state;
+     });
+     builder.addCase(registerUser.rejected, (state, action) => {
+       if (typeof action.payload === "string") {
+         return {
+           ...state,
+           registerStatus: "rejected",
+           registerError: action.payload,
+         };
+       } else return state;
+     });
+     builder.addCase(loginUser.pending, (state, action) => {
+       return { ...state, loginStatus: "pending" };
+     });
+     builder.addCase(loginUser.fulfilled, (state, action) => {
+       if (action.payload) {
+         const user = jwtDecode<MyToken>(action.payload);
+         let img_fixer;
+         if (img_fixer === undefined) {
+           img_fixer = "../imgs/user.png";
+         }
+         return {
+           ...state,
+           token: action.payload,
+           username: user.username,
+           email: user.email,
+           _id: user._id,
+           loginStatus: "success",
+ 
+           name: user.name,
+           surname: user.surname,
+           dni: user.dni,
+           image: img_fixer,
+         };
+       } else return state;
+     });
+     builder.addCase(loginUser.rejected, (state, action) => {
+       if (typeof action.payload === "string") {
+         return {
+           ...state,
+           loginStatus: "rejected",
+           loginError: action.payload,
+         };
+       } else return state;
+     });
+     builder.addCase(getUser.pending, (state, action) => {
+       return {
+         ...state,
+         getUserStatus: "pending",
+       };
+     });
+     builder.addCase(getUser.fulfilled, (state, action) => {
+       if (action.payload) {
+         const user = jwtDecode<MyToken>(action.payload);
+         return {
+           ...state,
+           token: action.payload,
+           username: user.username,
+           email: user.email,
+           _id: user._id,
+           getUserStatus: "success",
+         };
+       } else return state;
+     });
+     builder.addCase(getUser.rejected, (state, action) => {
+       return {
+         ...state,
+         getUserStatus: "rejected",
+         getUserError: action.payload,
+       };
+     });
+   },
+ });
+ 
+ export const { loadUser, logoutUser } = authSlice.actions;
+ 
+ export default authSlice.reducer;
+ 

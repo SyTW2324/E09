@@ -7,12 +7,17 @@
   import logoImage1 from '../imgs/full_logo.png';
   import logoImage2 from '../imgs/only_logo.png';
   import { Link } from 'react-router-dom';
+  import { useDispatch, useSelector } from "react-redux";
+  import { logoutUser } from "../slices/authSlice";
+
   import './header.css';
 
 function NavScroll() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+  let auth = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
 
   const handleScroll = () => {
     const scrollTop = window.pageYOffset;
@@ -43,16 +48,23 @@ function NavScroll() {
   useEffect(() => {
     // Actualizar el estado isLoggedIn cuando authToken cambie
     setIsLoggedIn(!!localStorage.getItem('token'));
-    console.log ("AAAAAAAAAAAAAAAAAAAAAAAAAA")
-    console.log (localStorage.getItem('token'));
-    console.log ("AAAAAAAAAAAAAAAAAAAAAAAAAA")
-
+    console.log("token:");
+    console.log(localStorage.getItem('token'));
   }, [localStorage.getItem('token')]);
 
   const handleLogout = () => {
     // Lógica para realizar el logout (eliminar token, limpiar el estado, etc.)
     localStorage.removeItem('token');
     setIsLoggedIn(false);
+  
+    // Eliminamos al usuario por completo
+    localStorage.removeItem('user');
+  
+    // Dispatch para actualizar el estado auth
+    dispatch(logoutUser());
+
+    console.log("Usuario borrado");
+
   };
 
   const logoImage = isMobile ? logoImage2 : isScrolled ? logoImage2 : logoImage1;
@@ -83,7 +95,6 @@ function NavScroll() {
                   LOGOUT
                 </Button>
               </Link>
-
             ) : (
               <>
                 <Link to="/login">
