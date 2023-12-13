@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import logoImage1 from '../imgs/full_logo.png';
-import logoImage2 from '../imgs/only_logo.png';
-import { Link } from 'react-router-dom';
-import './header.css';
+  import React, { useState, useEffect } from 'react';
+  import Button from 'react-bootstrap/Button';
+  import Container from 'react-bootstrap/Container';
+  import Form from 'react-bootstrap/Form';
+  import Nav from 'react-bootstrap/Nav';
+  import Navbar from 'react-bootstrap/Navbar';
+  import logoImage1 from '../imgs/full_logo.png';
+  import logoImage2 from '../imgs/only_logo.png';
+  import { Link } from 'react-router-dom';
+  import './header.css';
 
 function NavScroll() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
 
   const handleScroll = () => {
     const scrollTop = window.pageYOffset;
@@ -39,9 +40,24 @@ function NavScroll() {
     handleResize();
   }, []);
 
+  useEffect(() => {
+    // Actualizar el estado isLoggedIn cuando authToken cambie
+    setIsLoggedIn(!!localStorage.getItem('token'));
+    console.log ("AAAAAAAAAAAAAAAAAAAAAAAAAA")
+    console.log (localStorage.getItem('token'));
+    console.log ("AAAAAAAAAAAAAAAAAAAAAAAAAA")
+
+  }, [localStorage.getItem('token')]);
+
+  const handleLogout = () => {
+    // Lógica para realizar el logout (eliminar token, limpiar el estado, etc.)
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+  };
+
   const logoImage = isMobile ? logoImage2 : isScrolled ? logoImage2 : logoImage1;
-  const logoWidth = isMobile ? 90 : 300; // Ajusta el ancho
-  const logoHeight = isMobile ? 62 : 62; // Ajusta la altura
+  const logoWidth = isMobile ? 90 : 300;
+  const logoHeight = isMobile ? 62 : 62;
 
   return (
     <Navbar expand="lg" className={`custom-navbar-bg ${isScrolled ? 'scrolled' : ''}`}>
@@ -61,16 +77,27 @@ function NavScroll() {
             {/* Resto del código para la navegación */}
           </Nav>
           <Form className="d-flex">
-            <Link to="/login">
-              <Button variant="outline-success" className="button-margin custom-button">
-                LOGIN
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button variant="outline-success" className="button-margin custom-button">
-                SIGNUP
-              </Button>
-            </Link>
+            {isLoggedIn ? (
+              <Link to="/">
+                <Button variant="outline-success" className="button-margin custom-button" onClick={handleLogout}>
+                  LOGOUT
+                </Button>
+              </Link>
+
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="outline-success" className="button-margin custom-button">
+                    LOGIN
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button variant="outline-success" className="button-margin custom-button">
+                    SIGNUP
+                  </Button>
+                </Link>
+              </>
+            )}
           </Form>
         </Navbar.Collapse>
       </Container>

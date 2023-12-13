@@ -196,6 +196,10 @@ const authSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, action) => {
       if (action.payload) {
         const user = jwtDecode<MyToken>(action.payload);
+        let img_fixer;
+        if (img_fixer === undefined) {
+          img_fixer = "../imgs/user.png";
+        }
         return {
           ...state,
           token: action.payload,
@@ -207,7 +211,7 @@ const authSlice = createSlice({
           name: user.name,
           surname: user.surname,
           dni: user.dni,
-          image: user.image,
+          image: img_fixer,
         };
       } else return state;
     });
