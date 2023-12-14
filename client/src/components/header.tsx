@@ -9,6 +9,7 @@
   import { Link } from 'react-router-dom';
   import { useDispatch, useSelector } from "react-redux";
   import { logoutUser } from "../slices/authSlice";
+  import default_user_logo from '../imgs/user.png';
 
   import './header.css';
 
@@ -90,11 +91,18 @@ function NavScroll() {
           </Nav>
           <Form className="d-flex">
             {isLoggedIn ? (
-              <Link to="/">
-                <Button variant="outline-success" className="button-margin custom-button" onClick={handleLogout}>
-                  LOGOUT
-                </Button>
-              </Link>
+              <>
+                <Link to="/">
+                  <Button variant="outline-success" className="button-margin custom-button" onClick={handleLogout}>
+                    LOGOUT
+                  </Button>
+                </Link>
+                <Link to="/user">
+                  <Button variant="outline-success" className="button-margin custom-button">
+                  <img src={auth.image ? default_user_logo : auth.img} alt="foto de perfil" className="d-block ui-w-25 rounded-circle"/>
+                  </Button>
+                </Link>
+              </>
             ) : (
               <>
                 <Link to="/login">
