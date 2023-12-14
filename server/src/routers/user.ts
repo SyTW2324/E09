@@ -1,12 +1,11 @@
 import express from "express";
 import { User } from "../models/user.js";
+import { HouseModel } from "../models/place.js";
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { verifyToken } from "../functions/verifytoken.js";
 import dotenv from 'dotenv';
 
 dotenv.config();
-
-
 
 /**
  * Se exporta el router para poder ser usado en app.ts
@@ -56,7 +55,7 @@ userRouter.get("/users", async (req, res) => {
 });
 
 /**
- * Get para un usuario en específico mediante ID
+ * Get para un usuario en específico mediante DNI
  */
 userRouter.get("/users/:dni", async (req, res) => {
   const dni = req.params.dni;
@@ -104,25 +103,7 @@ userRouter.post("/users/login", async (req, res) => {
 });
 
 /**
- * Delete para eliminar un usuario en específico mediante query
- */
-userRouter.delete("/users/:dni", async (req, res) => {
-  const dni = req.params.dni;
-  try {
-    const user = await User.findOne({ dni: dni });
-    //const user = await User.findOneAndDelete({ name });
-    if (!user) {
-      return res.status(404).send("No se encuentra el usuario");
-    }
-    await User.findOneAndDelete({ dni: dni });
-    return res.status(200).send(user);
-  } catch (error) {
-    return res.status(400).send(error);
-  }
-});
-
-/**
- * Patch para actualizar un usuario en específico mediante ID y los datos en el body
+ * Patch para actualizar un usuario en específico mediante DNI y los datos en el body
  */
 userRouter.patch("/users/:dni", async (req, res) => {
   const dni = req.params.dni;
@@ -153,20 +134,22 @@ userRouter.patch("/users/:dni", async (req, res) => {
   }
 });
 
-// /**
-//  * Delete para eliminar un usuario en específico mediante query
-//  */
-// userRouter.delete("/users", async (req, res) => {
-//   const name = req.query.name;
-//   try {
-//     const user = await User.findOne({ name });
-//     //const user = await User.findOneAndDelete({ name });
-//     if (!user) {
-//       return res.status(404).send();
-//     }
-//     await User.findOneAndDelete({ name });
-//     return res.status(200).send(user);
-//   } catch (error) {
-//     return res.status(400).send(error);
-//   }
-// });
+/**
+ * Delete para eliminar un usuario en específico mediante dni
+ */
+userRouter.delete("/users/:dni", async (req, res) => {
+  const dni = req.params.dni;
+  try {
+    const user = await User.findOne({ dni: dni });
+    //const user = await User.findOneAndDelete({ name });
+    if (!user) {
+      return res.status(404).send("No se encuentra el usuario");
+    }
+    await HouseModel.findOneAndDelete({ ownerDni: dni });
+    await User.findOneAndDelete({ dni: dni });
+    return res.status(200).send(user);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+});
+

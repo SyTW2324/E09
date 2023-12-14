@@ -1,6 +1,7 @@
 import { Document, model, Schema } from 'mongoose';
 
 export interface HouseDocument extends Document {
+  ownerDni: string;
   address: string;
   bedrooms: number;
   bathrooms: number;
