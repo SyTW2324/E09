@@ -31,3 +31,8 @@ jobs:
     
     - name: Running tests
       run: npm run test
+
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: https://e09-sytw.slack.com

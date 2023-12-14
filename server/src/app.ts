@@ -20,5 +20,6 @@ app.use(cors({
 }));
 
 app.use(userRouter);
-app.use(defaultRouter);
 app.use(placeRouter);
+app.use(defaultRouter);
+

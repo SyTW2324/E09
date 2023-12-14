@@ -64,7 +64,7 @@ placeRouter.get("/places", async (req, res) => {
 placeRouter.get("/places/:id", async (req, res) => {
   const id = req.params.id;
   try {
-    const places = await HouseModel.find({ id: id });
+    const places = await HouseModel.findById(id);
     if (!places) {
       return res.status(404).send();
     }
@@ -80,11 +80,11 @@ placeRouter.get("/places/:id", async (req, res) => {
 placeRouter.delete("/places/:id", async (req, res) => {
   const id = req.params.id;
   try {
-    const place = await HouseModel.findOne({ id: id });
+    const place = await HouseModel.findById(id);
     if (!place) {
       return res.status(404).send("No se encuentra el usuario");
     }
-    await HouseModel.findOneAndDelete({ id: id });
+    await HouseModel.findByIdAndDelete(id);
     return res.status(200).send(place);
   } catch (error) {
     return res.status(400).send(error);
