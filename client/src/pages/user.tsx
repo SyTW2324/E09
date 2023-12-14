@@ -10,45 +10,18 @@ import { registerUser } from "../slices/authSlice";
 import { useState } from "react";
 import "./CSS/user.css";
 
-function Register() {
+import default_user_logo from '../imgs/user.png';
+
+function User() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const auth = useSelector((state: any) => state.auth);
-
-  const [user, setUser] = useState({
-    name: "Pedro",
-    surname: "Comekk",
-    username: "Aslkdj",
-    email: "alojomora@mora.com",
-    dni: "asdasd",
-  });
-
   useEffect(() => {
-    if (auth._id) {
-      navigate("/user");
+    if (!auth._id) {
+      navigate("/");
     }
-  }, [auth._id, navigate]);
+    console.log(auth);
+  }, [auth, navigate]);
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-
-    // Obtener los valores del formulario
-    const formData = new FormData(e.target);
-    const newUser = Object.fromEntries(formData.entries()) as { 
-      name: string; 
-      surname: string; 
-      username: string; 
-      email: string; 
-      dni: string; 
-      password: string; 
-      image: "https://bootdey.com/img/Content/avatar/avatar1.png";
-    };
-  
-    setUser(newUser);
-
-    dispatch(registerUser(user) as any);
-  };
- 
   return (
     <div className="User">
       <header>
@@ -58,9 +31,9 @@ function Register() {
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
       <div className="container bootdey flex-grow-1 container-p-y">
                   <div className="media align-items-center py-3 mb-3">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" className="d-block ui-w-100 rounded-circle"/>
+                  <img src={auth.image ? default_user_logo : auth.img} alt="foto de perfil" className="d-block ui-w-100 rounded-circle"/>
                     <div className="media-body ml-4">
-                      <h4 className="font-weight-bold mb-0">{user.name} {user.surname} <span className="text-muted font-weight-normal">{user.email}</span></h4>
+                      <h4 className="font-weight-bold mb-0">{auth.name} {auth.surname} <span className="text-muted font-weight-normal">{auth.email}</span></h4>
                       <a href="javascript:void(0)" className="btn btn-primary btn-sm">Edit</a>&nbsp;
                       <a href="javascript:void(0)" className="btn btn-default btn-sm icon-btn"><i className="fa fa-mail"></i></a>
                     </div>
@@ -73,19 +46,19 @@ function Register() {
                         <tbody>
                           <tr>
                             <td>Username:</td>
-                            <td>{user.username}</td>
+                            <td>{auth.username}</td>
                           </tr>
                           <tr>
                             <td>Name:</td>
-                            <td>{user.name} {user.surname}</td>
+                            <td>{auth.name} {auth.surname}</td>
                           </tr>
                           <tr>
                             <td>E-mail:</td>
-                            <td>{user.email}</td>
+                            <td>{auth.email}</td>
                           </tr>
                           <tr>
                             <td>DNI:</td>
-                            <td>{user.dni}</td>
+                            <td>{auth.dni}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -100,4 +73,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default User;

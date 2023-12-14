@@ -11,3 +11,8 @@
   font-family: 'Abel', sans-serif; 
   border-radius: 20px; 
 }
+
+.ui-w-25 {
+  width: 25px !important;
+  height: auto;
+}
