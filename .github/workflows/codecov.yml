@@ -33,7 +33,7 @@ jobs:
     - name: Get coverall information
       run: |
         npx nyc report --reporter=lcov
-        mv .nyc_output.json ../E09
+        mv coverage ../E09
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
