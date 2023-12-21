@@ -1,3 +1,7 @@
+# Code coverage files
+coverage
+.nyc_output
+
 basura.txt
 # Logs
 logs
