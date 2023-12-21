@@ -28,7 +28,7 @@ jobs:
       run: npm i
     
     - name: Running coverage
-      run: npm run covergae
+      run: npm run coverage
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
