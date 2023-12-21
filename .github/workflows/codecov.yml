@@ -3,7 +3,7 @@
   # env:
   #   CODECOV_TOKEN: 2007ad9e-effd-4a34-bacc-17ff31f66350
 
-  name: codecov
+name: codecov
 
 on:
   push:
