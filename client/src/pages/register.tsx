@@ -1,13 +1,11 @@
-import Navbar from '../components/header';
-import Footer from '../components/footer';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Navbar from "../components/header";
+import Footer from "../components/footer";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { registerUser } from "../slices/authSlice";
-import { useState } from "react";
 
 function Register() {
   const navigate = useNavigate();
@@ -29,29 +27,28 @@ function Register() {
     }
   }, [auth._id, navigate]);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Obtener los valores del formulario
-    const formData = new FormData(e.target);
-    const newUser = Object.fromEntries(formData.entries()) as { 
-      name: string; 
-      surname: string; 
-      username: string; 
-      email: string; 
-      dni: string; 
-      password: string; 
+    const formData = new FormData(e.target as HTMLFormElement);
+    const newUser = Object.fromEntries(formData.entries()) as {
+      name: string;
+      surname: string;
+      username: string;
+      email: string;
+      dni: string;
+      password: string;
     };
-  
-    setUser(newUser);
 
-    dispatch(registerUser(user) as any);
+    // Utilizar el estado local directamente en la llamada a dispatch
+    dispatch(registerUser(newUser) as any);
   };
- 
+
   return (
     <div className="Login">
       <header>
-          <Navbar />
+        <Navbar />
       </header>
       <main>
         <div className="custom-form">
