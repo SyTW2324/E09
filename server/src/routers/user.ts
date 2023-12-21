@@ -24,9 +24,11 @@ userRouter.post("/users", async (req, res) => {
   const user = new User(req.body);
   try {
     await user.save();
+    console.log("Usuario creado");
+    console.log(user);
     return res.status(201).send(user);
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return res.status(400).send(err);
   }
 });
@@ -101,6 +103,7 @@ userRouter.post("/users/login", async (req, res) => {
     return res.status(500).send(err);
   }
 });
+
 
 /**
  * Patch para actualizar un usuario en específico mediante DNI y los datos en el body
