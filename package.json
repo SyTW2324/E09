@@ -16,12 +16,15 @@
     "start:client": "cd client && npm start",
     "test": "npm run build:server && concurrently \"npm run test:client\" \"npm run start:server\" -k -s first",
     "test:client": "cd client && npm run cy:run",
-    "coverage": "cd client && npm run coverage"
+    "coverage": "nyc --reporter=lcov npm test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^7.1.0"
+  },
+  "dependencies": {
+    "nyc": "^15.1.0"
   }
 }
