@@ -22,10 +22,10 @@ function Register() {
   });
 
   useEffect(() => {
-    if (auth._id) {
+    if (auth.email) {
       navigate("/user");
     }
-  }, [auth._id, navigate]);
+  }, [auth.email, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +33,7 @@ function Register() {
     // Obtener los valores del formulario
     const formData = new FormData(e.target as HTMLFormElement);
     const newUser = Object.fromEntries(formData.entries()) as {
+      _id: string;
       name: string;
       surname: string;
       username: string;
@@ -40,6 +41,9 @@ function Register() {
       dni: string;
       password: string;
     };
+
+    console.log("#####################################################");
+    console.log(newUser);
 
     // Utilizar el estado local directamente en la llamada a dispatch
     dispatch(registerUser(newUser) as any);
