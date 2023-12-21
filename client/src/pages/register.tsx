@@ -5,7 +5,7 @@ import Navbar from "../components/header";
 import Footer from "../components/footer";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { registerUser } from "../slices/authSlice";
+import { registerUser, loginUser } from "../slices/authSlice";
 
 function Register() {
   const navigate = useNavigate();
@@ -19,13 +19,14 @@ function Register() {
     email: "",
     dni: "",
     password: "",
+    _id: "",
   });
 
   useEffect(() => {
-    if (auth.email) {
+    if (auth._id) {
       navigate("/user");
     }
-  }, [auth.email, navigate]);
+  }, [auth._id, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,11 +43,22 @@ function Register() {
       password: string;
     };
 
-    console.log("#####################################################");
-    console.log(newUser);
+    // Enviar la solicitud al servidor y manejar la respuesta
+    const response = await dispatch(registerUser(newUser) as any);
 
+    // Actualizar el estado del usuario con la respuesta del servidor
+    if (response.payload && response.payload._id) {
+      setUser(response.payload);
+    }
+
+    console.log("################################");
+    console.log(newUser);
+    
     // Utilizar el estado local directamente en la llamada a dispatch
-    dispatch(registerUser(newUser) as any);
+    dispatch(loginUser(newUser) as any);
+
+    console.log("################################");
+    console.log(auth);
   };
 
   return (
