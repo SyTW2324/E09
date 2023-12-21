@@ -36,7 +36,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "coverage": "nyc --reporter=lcov npm run cy:run"
   },
   "eslintConfig": {
     "extends": [
