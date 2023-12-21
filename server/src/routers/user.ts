@@ -35,12 +35,12 @@ userRouter.post("/users", async (req, res) => {
  * Get para todos los usuarios o para un usuario en específico mediante nombre usando query
  */
 userRouter.get("/users", async (req, res) => {
-  const name = req.query.name;
+  const username = req.query.username;
   try {
     let users;
-    if (name) {
-      // Find all users that match the name
-      users = await User.find({ name });
+    if (username) {
+      // Find all users that match the username
+      users = await User.find({ username: username });
     } else {
       // Find all users
       users = await User.find();

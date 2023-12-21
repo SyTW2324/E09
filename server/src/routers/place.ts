@@ -74,15 +74,48 @@ placeRouter.get("/places/:id", async (req, res) => {
   }
 });
 
+placeRouter.patch("/places/:id", async (req, res) => {
+  const id = req.params.id;
+  const updates = Object.keys(req.body);
+  const allowedUpdates = [
+    "address",
+    "bedrooms",
+    "bathrooms",
+    "squareFeet",
+    "rentAmount",
+    "isAvailable",
+    "location",
+    "country",
+  ];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+  if (!isValidOperation) {
+    return res.status(400).send({ error: "Invalid updates!" });
+  }
+  try {
+    const place = await HouseModel.findByIdAndUpdate({ id }, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!place) {
+      return res.status(404).send();
+    }
+    return res.status(200).send(place);
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+});
+
 /**
- * Delete para eliminar un usuario en específico mediante query
+ * Delete para eliminar una vivienda en específico mediante parámetros
  */
 placeRouter.delete("/places/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const place = await HouseModel.findById(id);
     if (!place) {
-      return res.status(404).send("No se encuentra el usuario");
+      return res.status(404).send("No se encuentra la vivienda");
     }
     await HouseModel.findByIdAndDelete(id);
     return res.status(200).send(place);
