@@ -30,11 +30,6 @@ jobs:
     - name: Running tests
       run: npm run test
 
-    - name: Get coverall information
-      run: |
-        npx nyc report --reporter=lcov
-        mv coverage ../E09
-
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
       env:
