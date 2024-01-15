@@ -17,6 +17,11 @@ export interface HouseDocument extends Document {
 }
 
 const HouseSchema = new Schema<HouseDocument>({
+  ownerDni: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   address: {
     type: String,
     required: true,

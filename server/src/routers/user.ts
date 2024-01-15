@@ -4,6 +4,7 @@ import { HouseModel } from "../models/place.js";
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { verifyToken } from "../functions/verifytoken.js";
 import dotenv from 'dotenv';
+import { ReserveModel } from "../models/reserve.js";
 
 dotenv.config();
 
@@ -25,7 +26,6 @@ userRouter.post("/users", async (req, res) => {
   try {
     await user.save();
     console.log("Usuario creado");
-    console.log(user);
     return res.status(201).send(user);
   } catch (err) {
     console.log(err);
@@ -108,8 +108,11 @@ userRouter.post("/users/login", async (req, res) => {
 /**
  * Patch para actualizar un usuario en específico mediante DNI y los datos en el body
  */
-userRouter.patch("/users/:dni", async (req, res) => {
+userRouter.patch("/users/:dni", verifyToken, async (req, res) => {
   const dni = req.params.dni;
+  if (dni != req.body.loggedUser.dni) {
+    return res.status(404).send("El usuario loggeado y el usuario a actualizar no coinciden");
+  }
   const updates = Object.keys(req.body);
   const allowedUpdates = [
     "password",
@@ -140,15 +143,33 @@ userRouter.patch("/users/:dni", async (req, res) => {
 /**
  * Delete para eliminar un usuario en específico mediante dni
  */
-userRouter.delete("/users/:dni", async (req, res) => {
+userRouter.delete("/users/:dni", verifyToken, async (req, res) => {
   const dni = req.params.dni;
   try {
+    if (dni != req.body.loggedUser.dni) {
+      return res.status(404).send("El usuario loggeado y el usuario a eliminar no coinciden");
+    }
     const user = await User.findOne({ dni: dni });
     //const user = await User.findOneAndDelete({ name });
     if (!user) {
       return res.status(404).send("No se encuentra el usuario");
     }
-    await HouseModel.findOneAndDelete({ ownerDni: dni });
+    const reservesList = await ReserveModel.find({ userDni: dni });
+    for (let r of reservesList) {
+      await ReserveModel.findByIdAndDelete(r._id);
+    }
+    const houses = await HouseModel.find({ ownerDni: dni })
+    console.log(houses)
+    for (let house of houses) {
+      const reserves = await ReserveModel.find({ houseId: house._id });
+      for (let r of reserves) {
+        const date = new Date(r.exitDate.toString());
+        if (date > new Date()) {
+          return res.status(404).send("No se puede eliminar al usuario aun, existen reservas activas en sus viviendas");
+        }
+      }
+      await HouseModel.findByIdAndDelete(house._id);
+    }
     await User.findOneAndDelete({ dni: dni });
     return res.status(200).send(user);
   } catch (error) {

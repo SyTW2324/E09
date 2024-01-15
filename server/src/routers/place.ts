@@ -4,6 +4,7 @@ import { HouseModel } from "../models/place.js";
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { verifyToken } from "../functions/verifytoken.js";
 import dotenv from 'dotenv';
+import { ReserveModel } from "../models/reserve.js";
 
 dotenv.config();
 
@@ -20,14 +21,18 @@ placeRouter.use(express.json());
 /**
  * Post para crear una vivienda
  */
-placeRouter.post("/places", async (req, res) => {
+placeRouter.post("/places", verifyToken, async (req, res) => {
   try {
     const user = await User.findOne({ dni: req.body.ownerDni });
     if (!user) {
       return res.status(404).send("No se encuentra el propietario");
     }
+    if (req.body.ownerDni != req.body.loggedUser.dni) {
+      return res.status(404).send("El propietario y el usuario no coinciden");
+    }
     const house = new HouseModel(req.body);
     await house.save();
+    console.log("Vivienda creada");
     return res.status(201).send(house);
   } catch (err) {
     console.log(err)
@@ -110,13 +115,25 @@ placeRouter.patch("/places/:id", async (req, res) => {
 /**
  * Delete para eliminar una vivienda en específico mediante parámetros
  */
-placeRouter.delete("/places/:id", async (req, res) => {
+placeRouter.delete("/places/:id", verifyToken, async (req, res) => {
   const id = req.params.id;
   try {
     const place = await HouseModel.findById(id);
+    if (place) {
+      if (place.ownerDni != req.body.loggedUser.dni) {
+        return res.status(404).send("El propietario y el usuario no coinciden");
+      }
+    }
     if (!place) {
       return res.status(404).send("No se encuentra la vivienda");
     }
+    const reserves = await ReserveModel.find({ houseId: id });
+      for (let r of reserves) {
+        const date = new Date(r.exitDate.toString());
+        if (date > new Date()) {
+          return res.status(404).send("No se puede eliminar la vivienda aun, existen reservas activas");
+        }
+      }
     await HouseModel.findByIdAndDelete(id);
     return res.status(200).send(place);
   } catch (error) {

@@ -5,6 +5,7 @@ import { userRouter } from './routers/user.js';
 import { populate } from 'dotenv';
 import cors from 'cors';
 import { placeRouter } from './routers/place.js';
+import { reserveRouter } from './routers/reserve.js';
 
 
 export const app = express();
@@ -21,5 +22,6 @@ app.use(cors({
 
 app.use(userRouter);
 app.use(placeRouter);
+app.use(reserveRouter);
 app.use(defaultRouter);
 
