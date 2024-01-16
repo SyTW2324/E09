@@ -62,7 +62,7 @@ function Register() {
   };
 
   return (
-    <div className="Login">
+    <div className="register">
       <header>
         <Navbar />
       </header>

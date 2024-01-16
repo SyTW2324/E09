@@ -5,19 +5,18 @@ import './footer.css';
 
 function FooterBar() {
   return (
-    <>
-      <br />
+    <div className='footer'>
       <Navbar bg="light" data-bs-theme="light" className="footer-bar">
-        <Container>
+        {/* <Container> */}
           <Navbar.Brand href="#home"></Navbar.Brand>
           <Nav className="me-auto mx-auto">
             <Nav.Link href="#home" className="footer-link">Contact</Nav.Link>
             <Nav.Link href="#features" className="footer-link">About us</Nav.Link>
             <Nav.Link href="#pricing" className="footer-link">Newsletter</Nav.Link>
           </Nav>
-        </Container>
+        {/* </Container> */}
       </Navbar>
-    </>
+    </div>
   );
 }
 

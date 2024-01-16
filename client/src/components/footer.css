@@ -1,3 +1,26 @@
+/* .footer-bar {
+  background-color: #FFF0F3;
+}
+
+.footer-link {
+  color: #ED8B01 !important;
+  text-align: center;
+}
+
+.footer {
+  height: 60vh;
+}
+ */
+
+ /* En tu archivo footer.css */
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
 .footer-bar {
   background-color: #FFF0F3;
 }
@@ -7,3 +30,7 @@
   text-align: center;
 }
 
+/* Puedes eliminar la altura fija si no es necesaria */
+.footer {
+  /* height: 60vh; */
+} 
