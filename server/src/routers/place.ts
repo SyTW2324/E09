@@ -81,6 +81,16 @@ placeRouter.get("/places/:id", async (req, res) => {
 
 placeRouter.patch("/places/:id", async (req, res) => {
   const id = req.params.id;
+  const placeToAuth = await HouseModel.findById(id)
+  if (placeToAuth) {
+    if (placeToAuth.ownerDni != req.body.loggedUser.dni) {
+      return res.status(404).send("El propietario y el usuario no coinciden");
+    }
+  } else {
+    return res.status(404).send("No existe la vivienda a actualizar");
+  }
+  
+  delete req.body.loggedUser
   const updates = Object.keys(req.body);
   const allowedUpdates = [
     "address",

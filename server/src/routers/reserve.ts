@@ -88,8 +88,8 @@ reserveRouter.get("/reserves/:id", verifyToken, async (req, res) => {
     if (!place) {
       return res.status(404).send("No existe la vivienda de la reserva");
     }
-    if (place.ownerDni != req.body.loggedUser.dni) {
-      return res.status(404).send("El usuario loggeado y el usuario propietario de la reserva no coinciden");
+    if (place.ownerDni != req.body.loggedUser.dni && reserve.userDni != req.body.loggedUser.dni) {
+      return res.status(404).send("El usuario loggeado no coinciden con ninguno de los que intervienen en la reserva");
     }
     return res.send(reserve);
   } catch (err) {
@@ -130,7 +130,7 @@ reserveRouter.get("/reserves/:id", verifyToken, async (req, res) => {
 /**
  * Delete para eliminar una reserva en específico mediante su id
  */
-reserveRouter.delete("/reserves/:id", async (req, res) => {
+reserveRouter.delete("/reserves/:id", verifyToken, async (req, res) => {
   const id = req.params.id;
   try {
     const reserve = await ReserveModel.findById(id);

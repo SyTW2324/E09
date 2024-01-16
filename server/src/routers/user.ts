@@ -99,7 +99,6 @@ userRouter.post("/users/login", async (req, res) => {
       image:user[0].image,
     }, authToken});
   } catch (err) {
-    console.log(err)
     return res.status(500).send(err);
   }
 });
@@ -113,6 +112,7 @@ userRouter.patch("/users/:dni", verifyToken, async (req, res) => {
   if (dni != req.body.loggedUser.dni) {
     return res.status(404).send("El usuario loggeado y el usuario a actualizar no coinciden");
   }
+  delete req.body.loggedUser
   const updates = Object.keys(req.body);
   const allowedUpdates = [
     "password",
@@ -159,7 +159,6 @@ userRouter.delete("/users/:dni", verifyToken, async (req, res) => {
       await ReserveModel.findByIdAndDelete(r._id);
     }
     const houses = await HouseModel.find({ ownerDni: dni })
-    console.log(houses)
     for (let house of houses) {
       const reserves = await ReserveModel.find({ houseId: house._id });
       for (let r of reserves) {

@@ -14,9 +14,9 @@ export const verifyToken = async(req: any, res: any, next: any) => {
         throw new Error('Unauthorized');
       }
   
-      req.body.loggedUser = {...user, ...decodedUserInfo};
+      req.body.loggedUser = {...decodedUserInfo};
     } catch (error) {
-      return res.status(403).send('Unauthorized');
+      return res.status(403).send('El usuario no está loggeado o se agotó el tiempo de su sesión');
     }
     return next();
   }
