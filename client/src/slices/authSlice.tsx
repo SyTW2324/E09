@@ -30,11 +30,11 @@ interface AuthState {
   name: string;
   surname: string;
   dni: string;
-  // image: string;
+  image: string;
 }
 
 const initialState: AuthState = {
-  token: "",
+  token: localStorage.getItem('token') || '',
   username: "",
   email: "",
   password: "",
@@ -48,7 +48,7 @@ const initialState: AuthState = {
   name: "",
   surname: "",
   dni: "",
-  // image: "",
+  image: localStorage.getItem('profileImage') || '', // Carga la foto de perfil
 };
 
 export const registerUser = createAsyncThunk(
@@ -89,6 +89,9 @@ export const loginUser = createAsyncThunk(
 
       if (typeof token === 'string') {
         localStorage.setItem("token", token);
+        const decodedUser: MyToken = jwtDecode(token);
+        localStorage.setItem("user", JSON.stringify(decodedUser));
+        localStorage.setItem("profileImage", decodedUser.image); // Almacena la foto de perfil
         return token;
       } else {
         throw new Error('Token is not a string');
@@ -133,21 +136,25 @@ export const getUser = createAsyncThunk(
    name: "auth",
    initialState,
    reducers: {
-     loadUser(state, action) {
-       const token = state.token;
- 
-       if (token) {
-         const user: any = jwtDecode<MyToken>(token);
-         return {
-           ...state,
-           token,
-           username: user.username,
-           email: user.email,
-           _id: user._id,
-           userLoaded: true,
-         };
-       } else return { ...state, userLoaded: true };
-     },
+    loadUser(state) {
+      const token = state.token;
+    
+      if (token) {
+        const user: any = jwtDecode<MyToken>(token);
+        return {
+          ...state,
+          token,
+          username: user.username,
+          email: user.email,
+          _id: user._id,
+          userLoaded: true,
+          name: user.name,
+          surname: user.surname,
+          dni: user.dni,
+          // image: user.image,
+        };
+      } else return { ...state, userLoaded: false };
+    },
      logoutUser(state) {
        localStorage.removeItem("token");
  

@@ -1,23 +1,23 @@
-  import React, { useState, useEffect } from 'react';
-  import Button from 'react-bootstrap/Button';
-  import Container from 'react-bootstrap/Container';
-  import Form from 'react-bootstrap/Form';
-  import Nav from 'react-bootstrap/Nav';
-  import Navbar from 'react-bootstrap/Navbar';
-  import logoImage1 from '../imgs/full_logo.png';
-  import logoImage2 from '../imgs/only_logo.png';
-  import { Link } from 'react-router-dom';
-  import { useDispatch, useSelector } from "react-redux";
-  import { logoutUser } from "../slices/authSlice";
-  import default_user_logo from '../imgs/user.png';
+import React, { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import logoImage1 from '../imgs/full_logo.png';
+import logoImage2 from '../imgs/only_logo.png';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../slices/authSlice";
+import default_user_logo from '../imgs/user.png';
 
-  import './header.css';
+import './header.css';
 
 function NavScroll() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
-  let auth = useSelector((state: any) => state.auth);
+  const auth = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
 
   const handleScroll = () => {
@@ -46,11 +46,14 @@ function NavScroll() {
     handleResize();
   }, []);
 
+  
   useEffect(() => {
     // Actualizar el estado isLoggedIn cuando authToken cambie
     setIsLoggedIn(!!localStorage.getItem('token'));
     console.log("token:");
     console.log(localStorage.getItem('token'));
+
+    console.log(auth);
   }, [localStorage.getItem('token')]);
 
   const handleLogout = () => {
