@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import Navbar from "../components/header";
 import Footer from "../components/footer";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../slices/authSlice";
 import "./CSS/login.css"
 import { Link } from "react-router-dom";
-
 
 import "./CSS/login.css"
 import {
@@ -35,10 +32,20 @@ function Login() {
   });
 
   useEffect(() => {
-    if (auth._id) {
+    // Obtener el token desde el almacenamiento local
+    const storedToken = localStorage.getItem("token");
+
+    console.log("STORED TOKEN:")
+    console.log(storedToken);
+
+    // Verificar si el token está presente y no es nulo
+    if (storedToken) {
+      // Asegúrate de que este console.log se está ejecutando
+      console.log("Redirigiendo a /user...");
+      // Redirigir al usuario
       navigate("/user");
     }
-  }, [auth._id, navigate]);
+  }, [auth, navigate]);
 
   const handleSubmit = () => {
     // Utilizar el estado local directamente en la llamada a dispatch
@@ -81,7 +88,7 @@ function Login() {
                   <MDBInput
                               wrapperClass='mb-4'
                               label='Email address'
-                              id='formControlLg'
+                              id='formControlLguser'
                               type='email'
                               size="lg"
                               name="email"
@@ -91,7 +98,7 @@ function Login() {
                   <MDBInput
                               wrapperClass='mb-4'
                               label='Password'
-                              id='formControlLg'
+                              id='formControlLgpassword'
                               type='password'
                               size="lg"
                               name="password"
