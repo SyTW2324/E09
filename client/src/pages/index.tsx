@@ -1,12 +1,32 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FooterBar from "../components/footer";
 import NavScroll from "../components/header";
-import HousingImage from '../imgs/casas_blancas.png';
+import HousingImage from '../imgs/LogoSergio.png';
 // import Background from './imgs/background.jpg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { setHeaders, url } from "../slices/api";
+import MatrixOfCards from '../components/matrix_of_houses';
 
 import './CSS/home.css';
 
 function Home() {
+  const [places, setPlaces] = useState([]);
+
+  const fetchPlaces = async () => {
+    try {
+      const response = await axios.get(`${url}/places`);
+      console.log(response.data);
+      setPlaces(response.data);
+    } catch (error) {
+      console.error('Error fetching places:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPlaces();
+  }, []); // Empty dependency array ensures that the effect runs only once, similar to componentDidMount
+
   return (
     <div className="Home">
       <header className="Home-header">
@@ -27,19 +47,17 @@ function Home() {
           <div className="col-lg-6 text-center order-last">
             <img
               src={HousingImage}
-              alt="casas_blancas"
+              alt="LogoSergio"
               style={{ width: '100%', height: 'auto' }}
             />
           </div>
         </div>
-        {/* <h1>Hello World</h1> */}
         <div className="tree-background">
-          <h1>ANYAAAAAAAAAAAAAAAAAA</h1>
-        {/* <img
-              src={Background}
-              alt="background"
-              style={{ width: '100%', height: 'auto' }}
-            /> */}
+          <div className="insidebox" style={{ backgroundColor: 'rgba(255, 240, 243, 0.5)' }}> 
+            <>
+              <MatrixOfCards dataArray={places} />
+            </>
+          </div>
         </div>
       </main>
       <footer className='Home-footer'>

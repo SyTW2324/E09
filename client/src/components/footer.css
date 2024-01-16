@@ -1,21 +1,7 @@
-/* .footer-bar {
-  background-color: #FFF0F3;
-}
-
-.footer-link {
-  color: #ED8B01 !important;
-  text-align: center;
-}
+/* En tu archivo footer.css */
 
 .footer {
-  height: 60vh;
-}
- */
-
- /* En tu archivo footer.css */
-
-.footer {
-  position: fixed;
+  position: sticky; /* Cambia 'fixed' a 'sticky' */
   bottom: 0;
   left: 0;
   width: 100%;

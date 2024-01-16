@@ -1,7 +1,7 @@
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import FooterBar from "./components/footer";
 // import NavScroll from "./components/header";
-// import HousingImage from './imgs/casas_blancas.png';
+// import HousingImage from './imgs/LogoSergio.png';
 // import Background from './imgs/background.jpg';
 
 // import './App.css';
@@ -27,7 +27,7 @@
 //           <div className="col-lg-6 text-center order-last">
 //             <img
 //               src={HousingImage}
-//               alt="casas_blancas"
+//               alt="LogoSergio"
 //               style={{ width: '100%', height: 'auto' }}
 //             />
 //           </div>

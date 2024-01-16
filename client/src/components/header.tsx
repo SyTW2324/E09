@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import logoImage1 from '../imgs/full_logo.png';
-import logoImage2 from '../imgs/only_logo.png';
+import logoImage2 from '../imgs/LogoMin_Colored.svg';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../slices/authSlice";
