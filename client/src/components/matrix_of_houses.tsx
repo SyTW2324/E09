@@ -1,14 +1,16 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
-interface BasicExampleProps {
-  data: Data;
-}
+import { Link, useNavigate } from 'react-router-dom';
+import { Data, MatrixOfCardsProps, BasicExampleProps } from '../pages/interfaces/data_interfaces';
 
 const BasicExample: React.FC<BasicExampleProps> = ({ data }) => {
-  // Ahora puedes usar `data` dentro de este componente
-  // Por ejemplo, puedes reemplazar "Card Title" con `data.ownerDni`
+  const navigate = useNavigate();
+
+  const handleMoreInfoClick = () => {
+    navigate(`/place/${data._id}`);
+  };
+
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Img
@@ -17,37 +19,21 @@ const BasicExample: React.FC<BasicExampleProps> = ({ data }) => {
         style={{ width: '286px', height: '160px', objectFit: 'cover' }}
       />
       <Card.Body>
-        <Card.Title>{data.ownerDni}</Card.Title>
+        <Card.Title>{data.address}</Card.Title>
+        <Card.Title>{data.rentAmount}$</Card.Title>
         <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          {data.country}, {data.squareFeet} square meters
+          , {data.bedrooms} bedrooms, {data.bathrooms} bathrooms
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Button variant="primary" onClick={handleMoreInfoClick}>
+          More info
+        </Button>
       </Card.Body>
     </Card>
   );
 };
 
 
-interface Data {
-  ownerDni: string;
-  address: string;
-  bedrooms: number;
-  bathrooms: number;
-  squareFeet: number;
-  rentAmount: number;
-  isAvailable: boolean;
-  location: {
-    latitude: number;
-    longitude: number;
-  };
-  country: string;
-  images?: string[];
-}
-
-interface MatrixOfCardsProps {
-  dataArray: Data[];
-}
 
 
 const MatrixOfCards: React.FC<MatrixOfCardsProps> = ({ dataArray }) => {

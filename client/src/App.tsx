@@ -62,6 +62,7 @@ import Home from "./pages";
 import Register from "./pages/register";
 import Login from "./pages/login";
 import User from "./pages/user";
+import Place from "./pages/place";
 
 function App() {
 	return (
@@ -72,6 +73,7 @@ function App() {
 				<Route path="/register" element={<Register />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/user" element={<User />} />
+        <Route path="/place/:id" element={<Place />} />
 			</Routes>
 		</BrowserRouter>
 	);
