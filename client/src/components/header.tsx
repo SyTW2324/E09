@@ -55,6 +55,7 @@ function NavScroll() {
 
     console.log(auth);
   }, [localStorage.getItem('token')]);
+  //asdas
 
   const handleLogout = () => {
     // Lógica para realizar el logout (eliminar token, limpiar el estado, etc.)
