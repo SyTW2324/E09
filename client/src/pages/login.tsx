@@ -84,7 +84,7 @@ function Login() {
                   </h5>
                   <MDBInput
                     wrapperClass="mb-4"
-                    label="Email address"
+                    label="Email"
                     id="formControlLguser"
                     type="email"
                     size="lg"
