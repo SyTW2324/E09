@@ -73,7 +73,7 @@ export default function ProfilePlace() {
   };
 
   return (
-    <body>
+    <>
       <header>
         <Header />
       </header>
@@ -182,6 +182,6 @@ export default function ProfilePlace() {
       <footer>
         <Footer />
       </footer>
-    </body>
+    </>
   );
 }
