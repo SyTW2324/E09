@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+// Import necessary dependencies and components
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../components/header';
 import Footer from '../components/footer';
-import { Data, MatrixOfCardsProps, BasicExampleProps } from '../pages/interfaces/data_interfaces';
+import { Data } from '../pages/interfaces/data_interfaces';
 import {
   MDBCol,
   MDBContainer,
@@ -11,29 +12,26 @@ import {
   MDBCardText,
   MDBCardBody,
   MDBCardImage,
-  MDBBtn,
-  MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBProgress,
-  MDBProgressBar,
-  MDBIcon,
-  MDBListGroup,
-  MDBListGroupItem
-} from 'mdb-react-ui-kit';import axios from 'axios';
-import {url} from '../slices/api';
+  MDBBtn
+} from 'mdb-react-ui-kit';
+import axios from 'axios';
+import { url } from '../slices/api';
 import { UserDocumentInterface } from './interfaces/user_interface';
 import PlaceCarousel from '../components/carousel'; 
 import backgroundimage from '../imgs/background.jpg';
 import userImage from '../imgs/user.png';
 
+// Functional component for the profile of a place
 export default function ProfilePlace() {
+  // Initialize state variables and hooks
   const [user, setUser] = useState<UserDocumentInterface | null>(null);
   const { id } = useParams();
   const [placeData, setPlaceData] = useState<Data | null>(null);
 
+  // Function to fetch user data by ownerDNI
   const fetchUser = async (ownerDNI: string) => {
     try {
-      console.log("llamo al usuario")
+      console.log("Fetching user data");
       const response = await axios.get<UserDocumentInterface>(`${url}/users/${ownerDNI}`);
       console.log(response.data);
       setUser(response.data);
@@ -42,29 +40,31 @@ export default function ProfilePlace() {
     }
   };
 
+  // Function to fetch place data by place ID
   const fetchPlaceData = async () => {
     try {
       const response = await axios.get<Data>(`${url}/places/${id}`);
 
-      // Actualizar el estado con los datos de la vivienda
+      // Update state with place data
       setPlaceData(response.data);
 
-      // Llamar a fetchUser solo si ownerDNI está definido
+      // Call fetchUser only if ownerDNI is defined
       if (response.data.ownerDni) {
         await fetchUser(response.data.ownerDni);
       }
     } catch (error) {
-      console.error('Error al obtener los datos de la vivienda:', error);
+      console.error('Error fetching place data:', error);
     }
   };
 
+  // useEffect hook to fetch data on component mount or when ID changes
   useEffect(() => {
-    // Llamar a la función de obtención de datos
     fetchPlaceData();
   }, [id]);
 
   console.log(placeData);
 
+  // Styling for the background image
   const sectionStyle = {
     backgroundImage: `url(${backgroundimage})`,
     backgroundSize: 'cover',
@@ -72,6 +72,7 @@ export default function ProfilePlace() {
     backgroundColor: '#ED8B01',
   };
 
+  // Return JSX for the ProfilePlace component
   return (
     <>
       <header>

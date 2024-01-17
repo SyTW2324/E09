@@ -1,13 +1,9 @@
 import Navbar from '../components/header';
 import Footer from '../components/footer';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { registerUser } from "../slices/authSlice";
-import { useState } from "react";
+
 import "./CSS/user.css";
 
 import default_user_logo from '../imgs/user.png';
