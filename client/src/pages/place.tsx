@@ -24,6 +24,7 @@ import {url} from '../slices/api';
 import { UserDocumentInterface } from './interfaces/user_interface';
 import PlaceCarousel from '../components/carousel'; 
 import backgroundimage from '../imgs/background.jpg';
+import userImage from '../imgs/user.png';
 
 export default function ProfilePlace() {
   const [user, setUser] = useState<UserDocumentInterface | null>(null);
@@ -94,7 +95,7 @@ export default function ProfilePlace() {
                 <MDBCard className="mb-4">
                   <MDBCardBody className="text-center">
                     <MDBCardImage
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                      src={userImage}
                       alt="avatar"
                       className="rounded-circle"
                       style={{ width: '150px' }}
@@ -102,8 +103,16 @@ export default function ProfilePlace() {
                     <p className="text-muted mb-1">{user?.name}</p>
                     <p className="text-muted mb-4">{user?.surname}</p>
                     <div className="d-flex justify-content-center mb-2">
-                      <MDBBtn>Follow</MDBBtn>
-                      <MDBBtn outline className="ms-1">Message</MDBBtn>
+                      <MDBBtn>Book</MDBBtn>
+                      {/* <MDBBtn outline className="ms-1">Message</MDBBtn> */}
+                      <a
+                        href={`https://mail.google.com/mail/?view=cm&fs=1&to=${user?.email}`}
+                        className="btn btn-outline-secondary ms-1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Message
+                      </a>
                     </div>
                   </MDBCardBody>
                 </MDBCard>
