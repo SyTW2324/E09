@@ -22,6 +22,8 @@ import {
 } from 'mdb-react-ui-kit';import axios from 'axios';
 import {url} from '../slices/api';
 import { UserDocumentInterface } from './interfaces/user_interface';
+import PlaceCarousel from '../components/carousel'; 
+
 
 export default function ProfilePlace() {
   const [user, setUser] = useState<UserDocumentInterface | null>(null);
@@ -72,15 +74,7 @@ export default function ProfilePlace() {
           <MDBContainer className="py-5">
             <MDBRow>
               <MDBCol>
-                <MDBBreadcrumb className="bg-light rounded-3 p-3 mb-4">
-                  <MDBBreadcrumbItem>
-                    <a href='#'>Home</a>
-                  </MDBBreadcrumbItem>
-                  <MDBBreadcrumbItem>
-                    <a href="#">User</a>
-                  </MDBBreadcrumbItem>
-                  <MDBBreadcrumbItem active>User Profile</MDBBreadcrumbItem>
-                </MDBBreadcrumb>
+                <PlaceCarousel images={placeData?.images} />
               </MDBCol>
             </MDBRow>
 
