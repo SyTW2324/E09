@@ -33,3 +33,13 @@ body{
 .text-xlarge {
   font-size: 170% !important;
 }
+
+.User {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex-grow: 1;
+}
