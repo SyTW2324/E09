@@ -23,7 +23,7 @@ import {
 import {url} from '../slices/api';
 import { UserDocumentInterface } from './interfaces/user_interface';
 import PlaceCarousel from '../components/carousel'; 
-
+import backgroundimage from '../imgs/background.jpg';
 
 export default function ProfilePlace() {
   const [user, setUser] = useState<UserDocumentInterface | null>(null);
@@ -64,17 +64,28 @@ export default function ProfilePlace() {
 
   console.log(placeData);
 
+  const sectionStyle = {
+    backgroundImage: `url(${backgroundimage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundColor: '#ED8B01',
+  };
+
   return (
     <body>
       <header>
         <Header />
       </header>
       <main>
-        <section style={{ backgroundColor: '#eee' }}>
+        <section style={sectionStyle} >
           <MDBContainer className="py-5">
             <MDBRow>
               <MDBCol>
-                <PlaceCarousel images={placeData?.images} />
+                <MDBContainer className="bg-light rounded-3 p-3 mb-4">
+                    <MDBCol>
+                      <PlaceCarousel images={placeData?.images} />
+                    </MDBCol>
+                </MDBContainer>
               </MDBCol>
             </MDBRow>
 
