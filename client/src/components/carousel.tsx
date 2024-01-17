@@ -19,10 +19,6 @@ const PlaceCarousel: React.FC<PlaceCarouselProps> = ({ images }) => {
                 style={{maxHeight: '400px', objectFit: 'cover'}}
               />
             </div>
-            <Carousel.Caption>
-              <h3>{`Slide ${index + 1} label`}</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
           </Carousel.Item>
         ))}
     </Carousel>
