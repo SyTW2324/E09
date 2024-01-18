@@ -25,7 +25,7 @@ const PlaceCarousel: React.FC<PlaceCarouselProps> = ({ images }) => {
                 className="d-block w-100"
                 src={imageUrl}
                 alt={`Slide ${index + 1}`}
-                style={{maxHeight: '400px', objectFit: 'cover'}}
+                style={{ maxHeight: '400px', objectFit: 'cover' }}
               />
             </div>
           </Carousel.Item>
