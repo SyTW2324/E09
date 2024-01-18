@@ -66,6 +66,7 @@
   "devDependencies": {
     "@cypress/code-coverage": "^3.12.15",
     "babel-plugin-istanbul": "^6.1.1",
-    "cypress": "^13.6.0"
+    "cypress": "^13.6.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
