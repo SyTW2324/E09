@@ -1,5 +1,5 @@
 {
-  "homepage": "http://SergioPerera.github.io/odyssey",
+  "homepage": "https://sytw2324.github.io/E09/",
   "name": "oddysey-app",
   "version": "1.0.0",
   "description": "Travelling without cost",
@@ -11,15 +11,13 @@
     "prepare:client": "cd client && npm install",
     "build": "npm run prepare && npm run build:server",
     "build:server": "cd server && npm run build",
-    "start": "npm run prepare && concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
     "fullstart": "npm run prepare && npm run build:server && npm run start",
     "start:server": "cd server && npm start",
     "start:client": "cd client && npm start",
     "test": "npm run build:server && concurrently \"npm run test:client\" \"npm run start:server\" -k -s first",
     "test:client": "cd client && npm run cy:run",
-    "coverage": "nyc --reporter=lcov npm test",
-    "deploy": "npm run build && gh-pages -d dist"
-
+    "coverage": "nyc --reporter=lcov npm test"
   },
   "keywords": [],
   "author": "",
