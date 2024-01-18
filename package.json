@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "prepare": "npm i && concurrently \"npm run prepare:server\" \"npm run prepare:client\"",
+    "prepare": "concurrently \"npm run prepare:server\" \"npm run prepare:client\"",
     "prepare:server": "cd server && npm install",
     "prepare:client": "cd client && npm install",
     "build": "npm run prepare && npm run build:server",
