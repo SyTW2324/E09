@@ -11,7 +11,7 @@
     "prepare:client": "cd client && npm install",
     "build": "npm run build:server",
     "build:server": "cd server && npm run build",
-    "start": "npm run build && concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
     "fullstart": "npm run prepare && npm run build:server && npm run start",
     "start:server": "cd server && npm start",
     "start:client": "cd client && npm start",
